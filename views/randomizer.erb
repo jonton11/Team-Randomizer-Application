@@ -1,0 +1,43 @@
+<div class="container">
+<h1> Team Randomizer </h1>
+
+<hr />
+
+<form action="/randomizer" method="POST">
+  Team Names:
+  <br />
+  <textarea name="names" class="container"><%= session[:names] %></textarea>
+  <br />
+
+  <!-- Label and radio alignment are off  -->
+  <input type="radio" name="choice" style = "vertical-align: middle; margin: 5px;" value="Team Count" <%= "checked" if @choice == "Team Count" %> /> Team Count
+  <input type="radio" name="choice" style = "vertical-align: middle; margin: 5px;"
+  value = "Number Per Team" <%= "checked" if @choice == "Number Per Team" %> /> Number Per Team
+  <br />
+  <br />
+  <input type="text" name="number" value=<%= session[:number] %>>
+  <br />
+  <input type="submit" value="Submit" />
+
+  <br />
+
+</form>
+
+<% if @error %>
+  <%= @error %>
+<% else %>
+  <% if @names %>
+  <ul>
+    <% @names.each_with_index do |name, index| %>
+      <b><%= "Team #{index+1}" %></b>
+    <div><li>
+        <% name.each do |n| %>
+          <%= "#{n}" %>
+        <% end %>
+    </div></li>
+    <br />
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
+</div>
